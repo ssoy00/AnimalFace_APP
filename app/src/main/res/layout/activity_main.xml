@@ -49,9 +49,8 @@
                 android:id="@+id/menuIconLine3"
                 android:layout_width="30dp"
                 android:layout_height="3dp"
-                android:background="@android:color/black"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="16dp"/>
+                android:background="@android:color/black" />
         </RelativeLayout>
 
         <!-- Spacer to center the logo -->
@@ -93,8 +92,42 @@
         android:background="#deb887"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="-200dp"
-        android:layout_marginLeft="-200dp"/>
+        android:translationX="-200dp"
+        android:visibility="gone">
+
+        <!-- 메뉴 항목 1 -->
+        <TextView
+            android:id="@+id/menu_item_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:padding="16dp"
+            android:text="메뉴 항목 1"
+            android:textSize="18sp"
+            android:textColor="#000"/>
+
+        <!-- 메뉴 항목 2 -->
+        <TextView
+            android:id="@+id/menu_item_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menu_item_1"
+            android:padding="16dp"
+            android:text="메뉴 항목 2"
+            android:textSize="18sp"
+            android:textColor="#000"/>
+
+        <!-- 메뉴 항목 3 -->
+        <TextView
+            android:id="@+id/menu_item_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/menu_item_2"
+            android:padding="16dp"
+            android:text="메뉴 항목 3"
+            android:textSize="18sp"
+            android:textColor="#000"/>
+    </RelativeLayout>
 
     <!-- Content Section -->
     <FrameLayout
