@@ -58,22 +58,22 @@
             android:orientation="horizontal"
             android:layout_marginTop="16dp">
 
-            <CheckBox
-                android:id="@+id/save_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="로그인 저장"
-                android:checked="true" />
+<!--            <CheckBox-->
+<!--                android:id="@+id/save_login"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="로그인 저장"-->
+<!--                android:checked="true" />-->
 
-            <TextView
-                android:id="@+id/find_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="비밀번호 찾기"
-                android:textColor="@android:color/holo_blue_light"
-                android:layout_marginStart="16dp"
-                android:layout_gravity="center_vertical"
-                android:onClick="onFindPasswordClick" />
+<!--            <TextView-->
+<!--                android:id="@+id/find_password"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="비밀번호 찾기"-->
+<!--                android:textColor="@android:color/holo_blue_light"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:onClick="onFindPasswordClick" />-->
         </LinearLayout>
 
         <android.widget.Button
@@ -119,7 +119,7 @@
             android:id="@+id/btn_email_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="이메일로 간편 가입"
+            android:text="회원가입"
             android:background="@color/button_signup"
             android:textColor="@android:color/black"
             android:layout_marginTop="16dp"
