@@ -11,10 +11,12 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:background="@android:color/transparent"
             android:text="&#60;"
             android:onClick="onBackPressed"/>
 
@@ -87,15 +89,14 @@
             android:layout_height="wrap_content"
             android:hint="닉네임을 입력해주세요."/>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btn_complete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="가입완료"
-            android:background="@color/black"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="24dp"
-            android:onClick="goStep2"/>
+            android:background="@color/button_submit"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="24dp"/>
     </LinearLayout>
 
     <!-- Footer -->
@@ -103,7 +104,7 @@
         android:id="@+id/footer_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="사업자등록번호 897-87-01933"
+        android:text=""
         android:gravity="center"
         android:layout_marginTop="32dp"/>
 </LinearLayout>

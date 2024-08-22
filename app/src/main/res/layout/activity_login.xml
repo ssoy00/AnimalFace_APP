@@ -11,10 +11,12 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:background="@android:color/transparent"
             android:text="&#60;"
             android:onClick="onBackPressed"
             />
@@ -74,13 +76,13 @@
                 android:onClick="onFindPasswordClick" />
         </LinearLayout>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="로그인"
-            android:background="@color/black"
-            android:textColor="@android:color/white"
+            android:background="@color/button_login"
+            android:textColor="@android:color/black"
             android:layout_marginTop="24dp"
             android:onClick="onLoginClick" />
 
@@ -104,23 +106,22 @@
 
         <ImageButton
             android:id="@+id/btn_kakao_login"
-            android:layout_width="60dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
-            android:src="@drawable/kakao_logo"
-            android:scaleType="centerInside"
             android:contentDescription="카카오 계정으로 로그인"
             android:onClick="onKakaoLoginClick"
-            />
+            android:scaleType="centerInside"
+            android:src="@drawable/kakao_logo" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btn_email_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="이메일로 간편 가입"
-            android:background="@android:color/holo_blue_light"
-            android:textColor="@android:color/white"
+            android:background="@color/button_signup"
+            android:textColor="@android:color/black"
             android:layout_marginTop="16dp"
             android:onClick="onEmailSignupClick" />
     </LinearLayout>
