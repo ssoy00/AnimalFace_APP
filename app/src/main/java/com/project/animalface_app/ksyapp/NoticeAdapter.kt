@@ -1,55 +1,50 @@
-package com.project.animalface_app.ksyapp;
+package com.project.animalface_app.ksyapp
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.os.Build
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.RecyclerView
+import com.project.animalface_app.R
+import java.time.format.DateTimeFormatter
 
-import androidx.recyclerview.widget.RecyclerView;
+class NoticeAdapter(
+    private var notices: List<Notice>,
+    private val onClick: (Notice) -> Unit
+) : RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>() {
 
-import com.project.animalface_app.R;
-
-import java.util.List;
-
-public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder> {
-
-    private List<Notice> noticeList;
-
-    public NoticeAdapter(List<Notice> noticeList) {
-        this.noticeList = noticeList;
+    class NoticeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val noticeNo: TextView = view.findViewById(R.id.noticeNo)
+        val noticeName: TextView = view.findViewById(R.id.noticeName)
+        val noticeContents: TextView = view.findViewById(R.id.noticeContents)
+        val noticeDate: TextView = view.findViewById(R.id.noticeDate)
     }
 
-    @Override
-    public NoticeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notice, parent, false);
-        return new NoticeViewHolder(view);
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoticeViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_notice, parent, false)
+        return NoticeViewHolder(view)
     }
 
-    @Override
-    public void onBindViewHolder(NoticeViewHolder holder, int position) {
-        Notice notice = noticeList.get(position);
-        holder.noticeNo.setText(String.valueOf(notice.getNoticeNo()));
-        holder.noticeName.setText(notice.getNoticeName());
-        holder.noticeContents.setText(notice.getNoticeContents());
-    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onBindViewHolder(holder: NoticeViewHolder, position: Int) {
+        val notice = notices[position]
+        holder.noticeNo.text = notice.noticeNo.toString()
+        holder.noticeName.text = notice.noticeName
+        holder.noticeContents.text = notice.noticeContents
+        holder.noticeDate.text = notice.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
-    @Override
-    public int getItemCount() {
-        return noticeList.size();
-    }
-
-    public static class NoticeViewHolder extends RecyclerView.ViewHolder {
-        public TextView noticeNo;
-        public TextView noticeName;
-        public TextView noticeContents;
-        public TextView noticeDate;
-
-        public NoticeViewHolder(View itemView) {
-            super(itemView);
-            noticeNo = itemView.findViewById(R.id.noticeNo);
-            noticeName = itemView.findViewById(R.id.noticeName);
-            noticeContents = itemView.findViewById(R.id.noticeContents);
-            noticeDate = itemView.findViewById(R.id.noticeDate);
+        holder.itemView.setOnClickListener {
+            onClick(notice)
         }
+    }
+
+    override fun getItemCount(): Int = notices.size
+
+    fun updateData(newNotices: List<Notice>) {
+        notices = newNotices
+        notifyDataSetChanged()
     }
 }
