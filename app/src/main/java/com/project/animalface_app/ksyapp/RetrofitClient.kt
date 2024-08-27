@@ -1,26 +1,24 @@
 package com.project.animalface_app.ksyapp
 
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import android.os.Build
+import androidx.annotation.RequiresApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import com.google.gson.GsonBuilder
+import java.time.LocalDate
 
+@RequiresApi(Build.VERSION_CODES.O)
 object RetrofitClient {
-    private const val BASE_URL = "http://localhost:8080/api/notices/{noticeNo}"
+    private const val BASE_URL = "http://10.100.201.34:8080/"
 
-    private val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
+    val instance: Retrofit by lazy {
+        val gson = GsonBuilder()
+            .registerTypeAdapter(LocalDate::class.java, LocalDateDeserializer())
+            .create()
 
-    private val client = OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
-        .build()
-
-    val retrofitInstance: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 }

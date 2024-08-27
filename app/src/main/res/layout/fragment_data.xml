@@ -5,23 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
-    android:orientation="vertical"
     android:padding="8dp"
     app:cardElevation="0dp"
-    app:cardBackgroundColor="@android:color/transparent"
-    android:background="@android:color/transparent">
+    app:cardBackgroundColor="@android:color/transparent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:weightSum="9">
 
         <TextView
             android:id="@+id/noticeNo"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="번호"
             android:textColor="#000"
             android:textSize="14sp"
@@ -31,8 +30,8 @@
         <TextView
             android:id="@+id/noticeName"
             android:layout_width="0dp"
-            android:layout_weight="3"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:text="제목"
             android:textColor="#000"
             android:textSize="14sp"
@@ -42,8 +41,8 @@
         <TextView
             android:id="@+id/noticeContents"
             android:layout_width="0dp"
-            android:layout_weight="3"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:text="내용"
             android:textColor="#000"
             android:textSize="14sp"
@@ -53,8 +52,8 @@
         <TextView
             android:id="@+id/noticeDate"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:text="날짜"
             android:textColor="#000"
             android:textSize="14sp"
@@ -65,6 +64,5 @@
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
         android:background="@android:color/darker_gray"
-        android:layout_marginBottom="1dp"/>
-
+        android:layout_marginTop="1dp"/>
 </androidx.cardview.widget.CardView>
