@@ -2,13 +2,15 @@ package com.project.animalface_app.ksyapp
 
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import com.project.animalface_app.R
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,6 +37,7 @@ class DataFragment : Fragment() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +50,13 @@ class DataFragment : Fragment() {
         noticeApi = RetrofitClient.instance.create(NoticeApiService::class.java)
 
         getNoticeByNo(noticeNo)
+
+        val backButton: ImageButton = view.findViewById(R.id.backButton)
+        backButton.setOnClickListener {
+            // Notify the activity to show the noticeUI
+            (activity as? NoticeMainActivity)?.showNoticeUI()
+            fragmentManager?.popBackStack()
+        }
 
         return view
     }

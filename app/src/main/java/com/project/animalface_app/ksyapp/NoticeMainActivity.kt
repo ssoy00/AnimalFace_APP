@@ -3,6 +3,8 @@ package com.project.animalface_app.ksyapp
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +19,7 @@ import retrofit2.Response
 class NoticeMainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
-    val retrofitService = RetrofitClient.instance.create(NoticeApiService::class.java)
+    private val retrofitService = RetrofitClient.instance.create(NoticeApiService::class.java)
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: NoticeAdapter
 
@@ -33,6 +35,9 @@ class NoticeMainActivity : AppCompatActivity() {
         }
         recyclerView.adapter = adapter
 
+        // Initialize the noticeUI visibility
+        findViewById<LinearLayout>(R.id.noticeUI).visibility = View.VISIBLE
+
         if (savedInstanceState == null) {
             showFragment(NoticeFragment())
         }
@@ -40,15 +45,18 @@ class NoticeMainActivity : AppCompatActivity() {
         fetchNotices()
     }
 
-    fun showFragment(fragment: Fragment) {
+    private fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
     }
 
-    fun showNoticeDetail(noticeNo: Long) {
+    private fun showNoticeDetail(noticeNo: Long) {
         val fragment = DataFragment.newInstance(noticeNo)
+
+        findViewById<LinearLayout>(R.id.noticeUI)?.visibility = View.GONE
+
         showFragment(fragment)
     }
 
@@ -74,9 +82,23 @@ class NoticeMainActivity : AppCompatActivity() {
         })
     }
 
-
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    fun showNoticeUI() {
+        findViewById<LinearLayout>(R.id.noticeUI)?.visibility = View.VISIBLE
+    }
+
+    override fun onBackPressed() {
+        // Check if there's a fragment to pop
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStack()
+
+            // Ensure `noticeUI` is visible when returning from fragment
+            findViewById<LinearLayout>(R.id.noticeUI)?.visibility = View.VISIBLE
+        } else {
+            super.onBackPressed()
+        }
+    }
 }

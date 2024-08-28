@@ -12,7 +12,7 @@ interface NoticeApiService {
     @GET("api/notices")
     fun getNotices(): Call<List<Notice>>
 
-    @POST("api/notice/{noticeNo}")
+    @GET("api/notices/{noticeNo}")
     fun getNoticeByNo(@Path("noticeNo") noticeNo: Long): Call<Notice>
 
 }
