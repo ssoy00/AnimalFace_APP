@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#ffffff">
+
+    <!-- 뒤로가기 버튼 -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"
+        android:background="@android:color/transparent"
+        android:contentDescription="뒤로가기"
+        android:layout_gravity="start"
+        android:padding="8dp" />
+
+    <!-- 로그인 타이틀 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:textSize="24sp"
+        android:textColor="#333333"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp" />
+
+    <!-- 아이디 입력 -->
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="아이디 입력"
+        android:inputType="textEmailAddress"
+        android:backgroundTint="#FFEB3B"
+        android:padding="16dp"
+        android:textColorHint="#999999"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 비밀번호 입력 -->
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호 입력"
+        android:inputType="textPassword"
+        android:backgroundTint="#FFEB3B"
+        android:padding="16dp"
+        android:textColorHint="#999999"
+        android:layout_marginBottom="32dp" />
+
+    <!-- 로그인 버튼 -->
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="로그인"
+        android:background="#FFEB3B"
+        android:textColor="#000000"
+        android:padding="16dp"
+        android:layout_marginBottom="32dp" />
+
+    <!-- SNS로 시작하기 타이틀 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SNS로 시작하기"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 카카오 로그인 버튼 -->
+    <ImageButton
+        android:id="@+id/kakaoLoginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sns_kakao"
+        android:background="@null"
+        android:contentDescription="카카오 로그인"
+        android:layout_marginBottom="32dp"
+        android:padding="0dp"
+        android:scaleType="fitCenter" />
+
+
+    <!-- 회원가입 버튼 -->
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:background="#FFEB3B"
+        android:textColor="#000000"
+        android:padding="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 이용약관 안내 텍스트 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그인(가입) 시 이용약관 및 개인정보 취급방침에 동의하는 것으로 간주합니다."
+        android:textSize="12sp"
+        android:textColor="#999999"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>
