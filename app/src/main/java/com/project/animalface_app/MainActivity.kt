@@ -1,13 +1,14 @@
 package com.project.animalface_app
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.CheckBox
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
-import androidx.core.view.ViewCompat.animate
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,62 +18,101 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Inflate the content layout into the main activity layout
+        val contentFrame: FrameLayout = findViewById(R.id.content)
+        LayoutInflater.from(this).inflate(R.layout.activity_main2, contentFrame, true)
+
+        // Initialize UI components
         val menuIcon: CheckBox = findViewById(R.id.menuicon)
         val sidebar: View = findViewById(R.id.sidebar)
         val menuIconLine1: View = findViewById(R.id.menuIconLine1)
         val menuIconLine2: View = findViewById(R.id.menuIconLine2)
         val menuIconLine3: View = findViewById(R.id.menuIconLine3)
 
-        // 사이드바 열기/닫기 애니메이션 및 메뉴 아이콘 애니메이션
+        // Set up sidebar toggle functionality with animations
         menuIcon.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                if (!isSidebarOpen) {
-                    sidebar.visibility = View.VISIBLE
-                    sidebar.animate().translationX(0f).duration = 350
-                    animate(menuIconLine1).rotation(45f).setDuration(350).start()
-                    animate(menuIconLine2).alpha(0f).setDuration(350).start()
-                    animate(menuIconLine3).rotation(-45f).setDuration(350).start()
-                    isSidebarOpen = true
-                }
-            } else {
-                if (isSidebarOpen) {
-                    sidebar.animate().translationX(-200f).duration = 350
-                    animate(menuIconLine1).rotation(0f).setDuration(350).start()
-                    animate(menuIconLine2).alpha(1f).setDuration(350).start()
-                    animate(menuIconLine3).rotation(0f).setDuration(350).start()
-                    sidebar.postDelayed({
-                        sidebar.visibility = View.GONE
-                    }, 350) // 애니메이션 완료 후 사이드바 숨기기
-                    isSidebarOpen = false
-                }
-            }
+            toggleSidebar(isChecked, sidebar, menuIconLine1, menuIconLine2, menuIconLine3)
         }
 
-        // 사이드바 메뉴 항목 클릭 리스너 설정
+        // Set up sidebar menu item click listeners
+        setupMenuClickListeners()
+
+        // Set up logo and myPage click listeners
+        setupHeaderClickListeners()
+    }
+
+    // Toggle sidebar open/close with animations
+    private fun toggleSidebar(
+        isChecked: Boolean,
+        sidebar: View,
+        menuIconLine1: View,
+        menuIconLine2: View,
+        menuIconLine3: View
+    ) {
+        if (isChecked && !isSidebarOpen) {
+            openSidebar(sidebar, menuIconLine1, menuIconLine2, menuIconLine3)
+        } else if (!isChecked && isSidebarOpen) {
+            closeSidebar(sidebar, menuIconLine1, menuIconLine2, menuIconLine3)
+        }
+    }
+
+    // Open the sidebar with animation
+    private fun openSidebar(
+        sidebar: View,
+        menuIconLine1: View,
+        menuIconLine2: View,
+        menuIconLine3: View
+    ) {
+        sidebar.visibility = View.VISIBLE
+        sidebar.animate().translationX(0f).duration = 350
+        ViewCompat.animate(menuIconLine1).rotation(45f).setDuration(350).start()
+        ViewCompat.animate(menuIconLine2).alpha(0f).setDuration(350).start()
+        ViewCompat.animate(menuIconLine3).rotation(-45f).setDuration(350).start()
+        isSidebarOpen = true
+    }
+
+    // Close the sidebar with animation
+    private fun closeSidebar(
+        sidebar: View,
+        menuIconLine1: View,
+        menuIconLine2: View,
+        menuIconLine3: View
+    ) {
+        sidebar.animate().translationX(-200f).duration = 350
+        ViewCompat.animate(menuIconLine1).rotation(0f).setDuration(350).start()
+        ViewCompat.animate(menuIconLine2).alpha(1f).setDuration(350).start()
+        ViewCompat.animate(menuIconLine3).rotation(0f).setDuration(350).start()
+        sidebar.postDelayed({
+            sidebar.visibility = View.GONE
+        }, 350)
+        isSidebarOpen = false
+    }
+
+    // Setup click listeners for sidebar menu items
+    private fun setupMenuClickListeners() {
         val menuItem1: TextView = findViewById(R.id.menu_item_1)
         val menuItem2: TextView = findViewById(R.id.menu_item_2)
-        val menuItem3: TextView = findViewById(R.id.menu_item_3)
 
         menuItem1.setOnClickListener {
-            // 메뉴 항목 1 클릭 시 동작 정의
+            // Define actions for menu item 1 click
         }
 
         menuItem2.setOnClickListener {
-            // 메뉴 항목 2 클릭 시 동작 정의
+            // Define actions for menu item 2 click
         }
 
-        menuItem3.setOnClickListener {
-            // 메뉴 항목 3 클릭 시 동작 정의
-        }
+    }
 
+    // Setup click listeners for header elements like logo and myPage
+    private fun setupHeaderClickListeners() {
         val logo: ImageView = findViewById(R.id.logo)
         logo.setOnClickListener {
-            // 로고 클릭 시 동작 정의
+            // Define actions for logo click
         }
 
         val myPage: ImageView = findViewById(R.id.mypage)
         myPage.setOnClickListener {
-            // 마이페이지 클릭 시 동작 정의
+            // Define actions for myPage click
         }
     }
 }
