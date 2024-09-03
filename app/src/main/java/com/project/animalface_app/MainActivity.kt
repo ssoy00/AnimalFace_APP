@@ -1,45 +1,120 @@
 package com.project.animalface_app
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import androidx.activity.enableEdgeToEdge
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.CheckBox
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.project.animalface_app.kmsapp.LoginActivity
-import com.project.animalface_app.kmsapp.RegisterActivity
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var buttonGoToRegister: Button
-    private lateinit var buttonGoToLogin: Button
 
-//    @SuppressLint("MissingInflatedId")
+    private var isSidebarOpen = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
+        installSplashScreen()
         setContentView(R.layout.activity_main)
 
-        buttonGoToRegister = findViewById(R.id.buttonGoToRegister)
-        buttonGoToLogin = findViewById(R.id.buttonGoToLogin)
+        // Inflate the content layout into the main activity layout
+        val contentFrame: FrameLayout = findViewById(R.id.content)
+        LayoutInflater.from(this).inflate(R.layout.activity_main2, contentFrame, true)
 
-        // 회원가입 페이지로 이동
-        buttonGoToRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+        // Initialize UI components
+        val menuIcon: CheckBox = findViewById(R.id.menuicon)
+        val sidebar: View = findViewById(R.id.sidebar)
+        val menuIconLine1: View = findViewById(R.id.menuIconLine1)
+        val menuIconLine2: View = findViewById(R.id.menuIconLine2)
+        val menuIconLine3: View = findViewById(R.id.menuIconLine3)
+
+        // Set up sidebar toggle functionality with animations
+        menuIcon.setOnCheckedChangeListener { _, isChecked ->
+            toggleSidebar(isChecked, sidebar, menuIconLine1, menuIconLine2, menuIconLine3)
         }
 
-        // 로그인 페이지로 이동
-        buttonGoToLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        // Set up sidebar menu item click listeners
+        setupMenuClickListeners()
+
+        // Set up logo and myPage click listeners
+        setupHeaderClickListeners()
+    }
+
+    // Toggle sidebar open/close with animations
+    private fun toggleSidebar(
+        isChecked: Boolean,
+        sidebar: View,
+        menuIconLine1: View,
+        menuIconLine2: View,
+        menuIconLine3: View
+    ) {
+        if (isChecked && !isSidebarOpen) {
+            openSidebar(sidebar, menuIconLine1, menuIconLine2, menuIconLine3)
+        } else if (!isChecked && isSidebarOpen) {
+            closeSidebar(sidebar, menuIconLine1, menuIconLine2, menuIconLine3)
+        }
+    }
+
+    // Open the sidebar with animation
+    private fun openSidebar(
+        sidebar: View,
+        menuIconLine1: View,
+        menuIconLine2: View,
+        menuIconLine3: View
+    ) {
+        sidebar.visibility = View.VISIBLE
+        sidebar.animate().translationX(0f).duration = 350
+        ViewCompat.animate(menuIconLine1).rotation(45f).setDuration(350).start()
+        ViewCompat.animate(menuIconLine2).alpha(0f).setDuration(350).start()
+        ViewCompat.animate(menuIconLine3).rotation(-45f).setDuration(350).start()
+        isSidebarOpen = true
+    }
+
+    // Close the sidebar with animation
+    private fun closeSidebar(
+        sidebar: View,
+        menuIconLine1: View,
+        menuIconLine2: View,
+        menuIconLine3: View
+    ) {
+        sidebar.animate().translationX(-200f).duration = 350
+        ViewCompat.animate(menuIconLine1).rotation(0f).setDuration(350).start()
+        ViewCompat.animate(menuIconLine2).alpha(1f).setDuration(350).start()
+        ViewCompat.animate(menuIconLine3).rotation(0f).setDuration(350).start()
+        sidebar.postDelayed({
+            sidebar.visibility = View.GONE
+        }, 350)
+        isSidebarOpen = false
+    }
+
+    // Setup click listeners for sidebar menu items
+    private fun setupMenuClickListeners() {
+        val menuItem1: TextView = findViewById(R.id.menu_item_1)
+        val menuItem2: TextView = findViewById(R.id.menu_item_2)
+
+        menuItem1.setOnClickListener {
+            // Define actions for menu item 1 click
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        menuItem2.setOnClickListener {
+            // Define actions for menu item 2 click
+        }
+
+    }
+
+    // Setup click listeners for header elements like logo and myPage
+    private fun setupHeaderClickListeners() {
+        val logo: ImageView = findViewById(R.id.logo)
+        logo.setOnClickListener {
+            // Define actions for logo click
+        }
+
+        val myPage: ImageView = findViewById(R.id.mypage)
+        myPage.setOnClickListener {
+            // Define actions for myPage click
         }
     }
 }
