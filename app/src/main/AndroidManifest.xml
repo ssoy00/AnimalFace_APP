@@ -22,9 +22,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.project.animalface_app.ohjapp.CreateGameActivity"
+            android:name=".ohjapp.CreateGameActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ohjapp.LoginActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity
+            android:name=".ohjapp.RegisterActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

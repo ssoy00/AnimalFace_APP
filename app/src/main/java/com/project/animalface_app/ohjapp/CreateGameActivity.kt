@@ -1,117 +1,108 @@
 package com.project.animalface_app.ohjapp
 
 import android.os.Bundle
-import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
 import com.project.animalface_app.R
-import okhttp3.FormBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
 
 class CreateGameActivity : AppCompatActivity() {
+
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var sideBarButton: ImageButton
+    private lateinit var mainButton: ImageButton
+    private lateinit var myPageButton: ImageButton
+    private lateinit var submitBtn: Button
+    private lateinit var cancelBtn: Button
+    private lateinit var closeSidebarButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_game)
 
-        // Initialize views
-        val gameName = findViewById<EditText>(R.id.createGameName)
-        val question = findViewById<EditText>(R.id.createQuestion)
-        val answer = findViewById<EditText>(R.id.createAnswer)
-        val result = findViewById<EditText>(R.id.createResult)
-        val submitButton = findViewById<Button>(R.id.submitButton)
-        val resetButton = findViewById<Button>(R.id.resetButton)
+        // UI 요소 초기화
+        drawerLayout = findViewById(R.id.drawer_layout)
+        sideBarButton = findViewById(R.id.sideBarButton)
+        mainButton = findViewById(R.id.mainButton)
+        myPageButton = findViewById(R.id.myPageButton)
+        submitBtn = findViewById(R.id.submitBtn)
+        cancelBtn = findViewById(R.id.cancelBtn)
+        closeSidebarButton = findViewById(R.id.close_sidebar_button)
 
-        // Initialize DrawerLayout and NavigationView
-        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
-
-        // Set up the Toolbar
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        toolbar.setNavigationOnClickListener {
-            drawerLayout.open()
+        // 사이드바 열기 버튼 클릭 리스너 설정
+        sideBarButton.setOnClickListener {
+            drawerLayout.open()  // 사이드바 열기
         }
 
-        // Set up the NavigationView menu item click listener
-        navigationView.setNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    // Handle Home action
-                    Toast.makeText(this, "Home clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.nav_profile -> {
-                    // Handle Profile action
-                    Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.nav_settings -> {
-                    // Handle Settings action
-                    Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show()
-                }
-            }
-            drawerLayout.closeDrawer(GravityCompat.START)
-            true
+        // 사이드바 닫기 버튼 클릭 리스너 설정
+        closeSidebarButton.setOnClickListener {
+            drawerLayout.close()  // 사이드바 닫기
         }
 
-        // Set up button click listeners
-        submitButton.setOnClickListener {
-            if (validateForm(gameName, question, answer, result)) {
-                submitForm(gameName.text.toString(), question.text.toString(), answer.text.toString(), result.text.toString())
+        // 홈 버튼 클릭 리스너 설정
+        mainButton.setOnClickListener {
+            // 홈 버튼 클릭 시 동작 추가
+            Toast.makeText(this, "홈 버튼 클릭됨", Toast.LENGTH_SHORT).show()
+        }
+
+        // 마이 페이지 버튼 클릭 리스너 설정
+        myPageButton.setOnClickListener {
+            // 마이 페이지 버튼 클릭 시 동작 추가
+            Toast.makeText(this, "마이 페이지 버튼 클릭됨", Toast.LENGTH_SHORT).show()
+        }
+
+        // 제출 버튼 클릭 리스너 설정
+        submitBtn.setOnClickListener {
+            if (validateForm()) {
+                submitForm()
             } else {
                 Toast.makeText(this, "모든 필드를 입력해 주세요.", Toast.LENGTH_SHORT).show()
             }
         }
 
-        resetButton.setOnClickListener {
-            gameName.text.clear()
-            question.text.clear()
-            answer.text.clear()
-            result.text.clear()
+        // 초기화 버튼 클릭 리스너 설정
+        cancelBtn.setOnClickListener {
+            clearForm()
         }
     }
 
-    private fun validateForm(vararg fields: EditText): Boolean {
-        return fields.all { it.text.isNotBlank() }
+    // 폼 유효성 검사
+    private fun validateForm(): Boolean {
+        val gameName = findViewById<EditText>(R.id.createGameName).text.toString().trim()
+        val question = findViewById<EditText>(R.id.createQuestion).text.toString().trim()
+        val answer = findViewById<EditText>(R.id.createAnswer).text.toString().trim()
+        val result = findViewById<EditText>(R.id.createResult).text.toString().trim()
+
+        return gameName.isNotEmpty() && question.isNotEmpty() && answer.isNotEmpty() && result.isNotEmpty()
     }
 
-    private fun submitForm(name: String, question: String, answer: String, result: String) {
-        val client = OkHttpClient()
+    // 폼 제출 처리
+    private fun submitForm() {
+        val gameName = findViewById<EditText>(R.id.createGameName).text.toString()
+        val question = findViewById<EditText>(R.id.createQuestion).text.toString()
+        val answer = findViewById<EditText>(R.id.createAnswer).text.toString()
+        val result = findViewById<EditText>(R.id.createResult).text.toString()
 
-        val requestBody = FormBody.Builder()
-            .add("createGameName", name)
-            .add("createQuestion", question)
-            .add("createAnswer", answer)
-            .add("createResult", result)
-            .build()
+        // 서버로 데이터를 전송하거나 다른 액티비티로 데이터 전달
+        Toast.makeText(this, "폼이 제출되었습니다.", Toast.LENGTH_SHORT).show()
 
-        val request = Request.Builder()
-            .url("https://yourserver.com/createGame/create")
-            .post(requestBody)
-            .build()
+        // 예를 들어, 다른 액티비티로 데이터 전송
+        // val intent = Intent(this, AnotherActivity::class.java)
+        // intent.putExtra("gameName", gameName)
+        // intent.putExtra("question", question)
+        // intent.putExtra("answer", answer)
+        // intent.putExtra("result", result)
+        // startActivity(intent)
+    }
 
-        client.newCall(request).enqueue(object : okhttp3.Callback {
-            override fun onFailure(call: okhttp3.Call, e: java.io.IOException) {
-                runOnUiThread {
-                    Toast.makeText(this@CreateGameActivity, "서버와의 연결에 실패했습니다.", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
-                runOnUiThread {
-                    if (response.isSuccessful) {
-                        Toast.makeText(this@CreateGameActivity, "게임이 성공적으로 생성되었습니다!", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(this@CreateGameActivity, "서버 오류 발생.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        })
+    // 폼 초기화
+    private fun clearForm() {
+        findViewById<EditText>(R.id.createGameName).setText("")
+        findViewById<EditText>(R.id.createQuestion).setText("")
+        findViewById<EditText>(R.id.createAnswer).setText("")
+        findViewById<EditText>(R.id.createResult).setText("")
     }
 }
