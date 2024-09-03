@@ -53,6 +53,8 @@ dependencies {
 
     implementation ("com.jakewharton.threetenabp:threetenabp:1.4.4")
 
+    implementation ("androidx.core:core-splashscreen:1.0.1")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
