@@ -1,4 +1,4 @@
-package com.example.myapp
+package com.project.animalface_app.ohjapp
 
 import android.os.Bundle
 import android.widget.Button
