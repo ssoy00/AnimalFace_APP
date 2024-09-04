@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         // 사이드바 메뉴 항목 클릭 리스너 설정
         val menuItem1: TextView = findViewById(R.id.menu_item_1)
         val menuItem2: TextView = findViewById(R.id.menu_item_2)
-        val menuItem3: TextView = findViewById(R.id.menu_item_3)
+//        val menuItem3: TextView = findViewById(R.id.menu_item_3)
 
         menuItem1.setOnClickListener {
             // 메뉴 항목 1 클릭 시 동작 정의
@@ -61,9 +61,9 @@ class MainActivity : AppCompatActivity() {
             // 메뉴 항목 2 클릭 시 동작 정의
         }
 
-        menuItem3.setOnClickListener {
+//        menuItem3.setOnClickListener {
             // 메뉴 항목 3 클릭 시 동작 정의
-        }
+//        }
 
         val logo: ImageView = findViewById(R.id.logo)
         logo.setOnClickListener {
