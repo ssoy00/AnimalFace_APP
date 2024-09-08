@@ -1,5 +1,6 @@
 package com.project.animalface_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,9 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+//import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
+import com.project.animalface_app.kmsapp.ProfileActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen()
+//        installSplashScreen()
         setContentView(R.layout.activity_main)
 
         // Inflate the content layout into the main activity layout
@@ -94,6 +96,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupMenuClickListeners() {
         val menuItem1: TextView = findViewById(R.id.menu_item_1)
         val menuItem2: TextView = findViewById(R.id.menu_item_2)
+        val menuItem3: TextView = findViewById(R.id.menu_item_3)
 
         menuItem1.setOnClickListener {
             // Define actions for menu item 1 click
@@ -101,6 +104,12 @@ class MainActivity : AppCompatActivity() {
 
         menuItem2.setOnClickListener {
             // Define actions for menu item 2 click
+        }
+
+        menuItem3.setOnClickListener {
+            // "나의 보따리" 클릭 시 ProfileEditActivity로 이동
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
         }
 
     }

@@ -14,13 +14,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimalFace_APP"
         android:usesCleartextTraffic="true"
+        android:name=".kmsapp.retrofit.MyApplication"
         tools:targetApi="31" >
+
+
+        <!-- Google Mobile Ads SDK 초기화에 필요한 메타데이터 추가 -->
+<!--        <meta-data-->
+<!--            android:name="com.google.android.gms.ads.APPLICATION_ID"-->
+<!--            android:value="ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX" />-->
+
+
         <activity
             android:name=".ksyapp.SplashActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ksyapp.Main2Activity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ohjapp.ksyAPI.CreateGameMainActivity"
             android:exported="true" />
@@ -34,7 +43,10 @@
             android:name=".kmsapp.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".kmsapp.RegisterActivity"
+            android:name=".kmsapp.ProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".kmsapp.JoinActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
