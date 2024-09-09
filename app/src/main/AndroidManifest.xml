@@ -18,9 +18,10 @@
         <activity
             android:name=".ksyapp.SearchActivity"
             android:exported="true" />
+
         <activity
             android:name=".ksyapp.SplashActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ksyapp.Main2Activity"
             android:exported="true" />
@@ -32,6 +33,15 @@
             android:exported="true" />
         <activity
             android:name=".ksyapp.NoticeMainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".kmsapp.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name=".kmsapp.ProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".kmsapp.JoinActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

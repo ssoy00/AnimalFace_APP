@@ -10,11 +10,12 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+//import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import com.project.animalface_app.ksyapp.NoticeMainActivity
 import com.project.animalface_app.ksyapp.SearchActivity
 import com.project.animalface_app.ohjapp.ksyAPI.CreateGameMainActivity
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen()
+//        installSplashScreen()
         setContentView(R.layout.activity_main)
 
         val contentFrame: FrameLayout = findViewById(R.id.content)
@@ -110,6 +111,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupMenuClickListeners() {
         val menuItem1: TextView = findViewById(R.id.menu_item_1)
         val menuItem2: TextView = findViewById(R.id.menu_item_2)
+        val menuItem3: TextView = findViewById(R.id.menu_item_3)
 
         menuItem1.setOnClickListener {
             val intent = Intent(this, NoticeMainActivity::class.java)
@@ -118,6 +120,11 @@ class MainActivity : AppCompatActivity() {
 
         menuItem2.setOnClickListener {
             val intent = Intent(this, CreateGameMainActivity::class.java)
+            startActivity(intent)
+        }
+        menuItem3.setOnClickListener {
+            // "나의 보따리" 클릭 시 ProfileEditActivity로 이동
+            val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
     }
